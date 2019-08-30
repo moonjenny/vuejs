@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="uft-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>VueJs Test</title>
+  <!-- main page styles -->
+  <link rel="stylesheet" href="css/page.css">
+  <script src="js/vue.js"></script>
+  <!-- 도움되는 콘솔 경고를 포함한 개발 버전 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body class="docs">
+  <header id="header">head</header>
+  <div id="main">
+      <div class="content">
+          <h1>Vue.js 시작하기</h1>
+      
+          <h2>선언적 렌더링</h2>
+          <figure class="highlight html">
+            <span class="code">
+              <pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">  {{ message }}</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre>
+            </span>
+          </figure>
+          <figure class="highlight js">
+            <span class="code">
+              <pre><span class="line"><span class="keyword">var</span> app = <span class="keyword">new</span> Vue({</span><br><span class="line">  el: <span class="string">'#app'</span>,</span><br><span class="line">  data: {</span><br><span class="line">    message: <span class="string">'안녕하세요 Vue!'</span></span><br><span class="line">  }</span><br><span class="line">})</span><br></pre>
+            </span>
+          </figure>
+          <div id="app" class="demo">{{ message }}</div>
+          <!-- vue js -->
+          <script>
+          var app = new Vue({
+            el: '#app',
+            data: {
+            message: '안녕하세요 Vue!'
+            }
+          })
+          </script>
+
+          <figure class="highlight html">
+            <span class="code">
+              <pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app-2"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">v-bind:title</span>=<span class="string">"message"</span>&gt;</span></span><br><span class="line">    내 위에 잠시 마우스를 올리면 동적으로 바인딩 된 title을 볼 수 있습니다!</span><br><span class="line">  <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre>
+            </span>
+          </figure>
+          <figure class="highlight js">
+            <span class="code">
+              <pre><span class="line"><span class="keyword">var</span> app2 = <span class="keyword">new</span> Vue({</span><br><span class="line">  el: <span class="string">'#app-2'</span>,</span><br><span class="line">  data: {</span><br><span class="line">    message: <span class="string">'이 페이지는 '</span> + <span class="keyword">new</span> <span class="built_in">Date</span>() + <span class="string">' 에 로드 되었습니다'</span></span><br><span class="line">  }</span><br><span class="line">})</span><br></pre>
+            </span>
+          </figure>
+          <div id="app-2" class="demo">
+            <span v-bind:title="message">
+              내 위에 잠시 마우스를 올리면 동적으로 바인딩 된 title을 볼 수 있습니다!
+            </span>
+          </div>
+          <p>console <code>app2.message = '새로운 메시지'</code></p>
+          <script>
+          var app2 = new Vue({
+            el: '#app-2',
+            data: {
+              message: '이 페이지는 ' + new Date() + ' 에 로드 되었습니다'
+            }
+          })
+          </script>
+      
+          <h2>조건문과 반복문</h2>
+          <figure class="highlight html">
+            <span class="code">
+              <pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app-3"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">v-if</span>=<span class="string">"seen"</span>&gt;</span>이제 나를 볼 수 있어요<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre>
+            </span>
+          </figure>
+          <figure class="highlight js">
+            <span class="code">
+              <pre><span class="line"><span class="keyword">var</span> app3 = <span class="keyword">new</span> Vue({</span><br><span class="line">  el: <span class="string">'#app-3'</span>,</span><br><span class="line">  data: {</span><br><span class="line">    seen: <span class="literal">true</span></span><br><span class="line">  }</span><br><span class="line">})</span><br></pre>
+            </span>
+          </figure>
+          <div id="app-3" class="demo">
+            <p v-if="seen">이제 나를 볼 수 있어요</p>
+          </div>
+          <p>console <code>app3.seen = false</code></p>
+          <p>이 예제는 텍스트와 속성뿐 아니라 DOM의 구조에도 데이터를 바인딩 할 수 있음을 보여줍니다. 또한 Vue 엘리먼트가 Vue에 삽입/갱신/제거될 때 자동으로 트랜지션 효과를 적용할 수 있는 강력한 시스템을 제공합니다.</p>
+          <script>
+          var app3 = new Vue({
+            el: '#app-3',
+            data: {
+              seen: true
+            }
+          })
+          </script>
+
+          <figure class="highlight html">
+            <span class="code">
+              <pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app-4"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ol</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">"todo in todos"</span>&gt;</span></span><br><span class="line">      {{ todo.text }}</span><br><span class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ol</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre>
+            </span>
+          </figure>
+          <figure class="highlight js">
+            <span class="code">
+              <pre><span class="line"><span class="keyword">var</span> app4 = <span class="keyword">new</span> Vue({</span><br><span class="line">  el: <span class="string">'#app-4'</span>,</span><br><span class="line">  data: {</span><br><span class="line">    todos: [</span><br><span class="line">      { <span class="attr">text</span>: <span class="string">'JavaScript 배우기'</span> },</span><br><span class="line">      { <span class="attr">text</span>: <span class="string">'Vue 배우기'</span> },</span><br><span class="line">      { <span class="attr">text</span>: <span class="string">'무언가 멋진 것을 만들기'</span> }</span><br><span class="line">    ]</span><br><span class="line">  }</span><br><span class="line">})</span><br></pre>
+            </span>
+          </figure>
+          <div id="app-4" class="demo">
+            <ol>
+              <li v-for="todo in todos">
+                {{ todo.text }}
+              </li>
+            </ol>
+          </div>
+          <p>console <code>app4.todos.push({ text: 'New item' })</code></p>
+          <script>
+          var app4 = new Vue({
+            el: '#app-4',
+            data: {
+              todos: [
+                { text: 'JavaScript 배우기' },
+                { text: 'Vue 배우기' },
+                { text: '무언가 멋진 것을 만들기' }
+              ]
+            }
+          })
+          </script>
+
+
+          <h2>사용자 입력 핸들링</h2>
+          <figure class="highlight html">
+            <span class="code">
+                <pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app-5"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>{{ message }}<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">v-on:click</span>=<span class="string">"reverseMessage"</span>&gt;</span>메시지 뒤집기<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre>
+            </span>
+          </figure>
+          <figure class="highlight js">
+            <span class="code">
+                <pre><span class="line"><span class="keyword">var</span> app5 = <span class="keyword">new</span> Vue({</span><br><span class="line">  el: <span class="string">'#app-5'</span>,</span><br><span class="line">  data: {</span><br><span class="line">    message: <span class="string">'안녕하세요! Vue.js!'</span></span><br><span class="line">  },</span><br><span class="line">  methods: {</span><br><span class="line">    reverseMessage: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{</span><br><span class="line">      <span class="keyword">this</span>.message = <span class="keyword">this</span>.message.split(<span class="string">''</span>).reverse().join(<span class="string">''</span>)</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">})</span><br></pre>
+            </span>
+          </figure>
+          <div id="app-5" class="demo">
+            <p>{{ message }}</p>
+            <button v-on:click="reverseMessage">메시지 뒤집기</button>
+          </div>
+          <script>
+          var app5 = new Vue({
+            el: '#app-5',
+            data: {
+              message: '안녕하세요! Vue.js!'
+            },
+            methods: {
+              reverseMessage: function () {
+                this.message = this.message.split('').reverse().join('')
+              }
+            }
+          })
+          </script>
+
+          <figure class="highlight html">
+            <span class="code">
+                <pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app-6"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>{{ message }}<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">v-model</span>=<span class="string">"message"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre>
+            </span>
+          </figure>
+          <figure class="highlight js">
+            <span class="code">
+                <pre><span class="line"><span class="keyword">var</span> app6 = <span class="keyword">new</span> Vue({</span><br><span class="line">  el: <span class="string">'#app-6'</span>,</span><br><span class="line">  data: {</span><br><span class="line">    message: <span class="string">'안녕하세요 Vue!'</span></span><br><span class="line">  }</span><br><span class="line">})</span><br></pre>
+            </span>
+          </figure>
+          <div id="app-6" class="demo">
+            <p>{{ message }}</p>
+            <input v-model="message">
+          </div>
+          <script>
+          var app6 = new Vue({
+            el: '#app-6',
+            data: {
+              message: '안녕하세요 Vue!'
+            }
+          })
+          </script>
+
+          <h2>컴포넌트를 사용한 작성방법</h2>
+          <figure class="highlight html">
+            <span class="code">
+                <pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app-7"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ol</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- </span></span><br><span class="line"><span class="comment">      이제 각 todo-item 에 todo 객체를 제공합니다.</span></span><br><span class="line"><span class="comment">      화면에 나오므로, 각 항목의 컨텐츠는 동적으로 바뀔 수 있습니다. </span></span><br><span class="line"><span class="comment">      또한 각 구성 요소에 "키"를 제공해야합니다 (나중에 설명 됨).</span></span><br><span class="line"><span class="comment">     --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">todo-item</span></span></span><br><span class="line"><span class="tag">      <span class="attr">v-for</span>=<span class="string">"item in groceryList"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">v-bind:todo</span>=<span class="string">"item"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">v-bind:key</span>=<span class="string">"item.id"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">todo-item</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ol</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre>
+            </span>
+          </figure>
+          <figure class="highlight js">
+            <span class="code">
+                <pre><span class="line">Vue.component(<span class="string">'todo-item'</span>, {</span><br><span class="line">  props: [<span class="string">'todo'</span>],</span><br><span class="line">  template: <span class="string">'&lt;li&gt;{{ todo.text }}&lt;/li&gt;'</span></span><br><span class="line">})</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> app7 = <span class="keyword">new</span> Vue({</span><br><span class="line">  el: <span class="string">'#app-7'</span>,</span><br><span class="line">  data: {</span><br><span class="line">    groceryList: [</span><br><span class="line">      { <span class="attr">id</span>: <span class="number">0</span>, <span class="attr">text</span>: <span class="string">'Vegetables'</span> },</span><br><span class="line">      { <span class="attr">id</span>: <span class="number">1</span>, <span class="attr">text</span>: <span class="string">'Cheese'</span> },</span><br><span class="line">      { <span class="attr">id</span>: <span class="number">2</span>, <span class="attr">text</span>: <span class="string">'Whatever else humans are supposed to eat'</span> }</span><br><span class="line">    ]</span><br><span class="line">  }</span><br><span class="line">})</span><br></pre>
+            </span>
+          </figure>
+          <div id="app-7" class="demo">
+            <ol>
+              <!-- 
+                이제 각 todo-item 에 todo 객체를 제공합니다.
+                화면에 나오므로, 각 항목의 컨텐츠는 동적으로 바뀔 수 있습니다. 
+                또한 각 구성 요소에 "키"를 제공해야합니다 (나중에 설명 됨).
+                -->
+              <todo-item
+                v-for="item in groceryList"
+                v-bind:todo="item"
+                v-bind:key="item.id">
+              </todo-item>
+            </ol>
+          </div>
+          <script>
+          Vue.component('todo-item', {
+            props: ['todo'],
+            template: '<li>{{ todo.text }}</li>'
+          })
+
+          var app7 = new Vue({
+            el: '#app-7',
+            data: {
+              groceryList: [
+                { id: 0, text: 'Vegetables' },
+                { id: 1, text: 'Cheese' },
+                { id: 2, text: 'Whatever else humans are supposed to eat' }
+              ]
+            }
+          })
+          </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <figure class="highlight html">
+            <span class="code">
+            </span>
+          </figure>
+          <figure class="highlight js">
+            <span class="code">
+            </span>
+          </figure>
+  
+      </div>
+  </div>
+  <footer id="footer">footer</footer>
+</body>
+</html>
