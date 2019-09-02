@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="uft-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>VueJs Test</title>
+  <!-- main page styles -->
+  <link rel="stylesheet" href="css/page.css">
+  <script src="js/vue.js"></script>
+  <!-- 도움되는 콘솔 경고를 포함한 개발 버전 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body class="docs">
+  <header id="header">head</header>
+  <div id="main">
+      <div class="content">
+          <h1>템플릿 문법</h1>
+      
+          <h2>보간법(Interpolation)</h2>
+          <h3>문자열</h3>
+          <figure class="highlight html">
+            <span class="code">
+                <pre><span class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span>메시지: {{ msg }}<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre>
+            </span>
+          </figure>
+          <figure class="highlight html">
+            <span class="code">
+                <pre><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">v-once</span>&gt;</span>다시는 변경하지 않습니다: {{ msg }}<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre>
+            </span>
+          </figure>
+          
+          <h3>원시 HTML</h3>
+          <figure class="highlight html">
+            <span class="code">
+                <pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Using mustaches: {{ rawHtml }}<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Using v-html directive: <span class="tag">&lt;<span class="name">span</span> <span class="attr">v-html</span>=<span class="string">"rawHtml"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre>
+            </span>
+          </figure>
+          <div id="example1" class="demo">
+            <p>Using mustaches: {{ rawHtml }}</p>
+            <p>Using v-html directive: <span v-html="rawHtml"></span></p>
+          </div>
+          <p class="tip">웹사이트에서 임의의 HTML을 동적으로 렌더링하려면 <a href="https://en.wikipedia.org/wiki/Cross-site_scripting" target="_blank" rel="noopener">XSS 취약점</a>으로 쉽게 이어질 수 있으므로 매우 위험할 가능성이 있습니다. 신뢰할 수 있는 콘텐츠에서만 HTML 보간을 사용하고 사용자가 제공한 콘텐츠에서는 <strong>절대</strong> 사용하면 안됩니다.</p>
+          <script>
+          new Vue({
+            el: '#example1',
+            data: function () {
+              return {
+                rawHtml: '<span style="color: red">This should be red.</span>'
+              }
+            }
+          })
+          </script>
+
+          <h3>속성</h3>
+          <span class="code">v-bind 디렉티브</span>
+          <figure class="highlight html">
+            <span class="code">
+                <pre><span class="line"><span class="comment">&lt;!-- 속성을 바인딩 합니다. --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">v-bind:src</span>=<span class="string">"imageSrc"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 약어 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">:src</span>=<span class="string">"imageSrc"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- with inline string concatenation --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">:src</span>=<span class="string">"'/path/to/images/' + fileName"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 클래스 바인딩 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">:class</span>=<span class="string">"{ red: isRed }"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">:class</span>=<span class="string">"[classA, classB]"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">:class</span>=<span class="string">"[classA, { classB: isB, classC: isC }]"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 스타일 바인딩 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">:style</span>=<span class="string">"{ fontSize: size + 'px' }"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">:style</span>=<span class="string">"[styleObjectA, styleObjectB]"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 속성 객체 바인딩 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-bind</span>=<span class="string">"{ id: someProp, 'other-attr': otherProp }"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- prop 수식어를 사용하는 DOM 속성 바인딩 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-bind:text-content.prop</span>=<span class="string">"text"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 속성 바인딩. 컴포넌트에서 "prop"를 선언 해야 합니다.  --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">my-component</span> <span class="attr">:prop</span>=<span class="string">"someThing"</span>&gt;</span><span class="tag">&lt;/<span class="name">my-component</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 자식 컴포넌트와 공통으로 사용하는 부모 props를 전달합니다 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">child-component</span> <span class="attr">v-bind</span>=<span class="string">"$props"</span>&gt;</span><span class="tag">&lt;/<span class="name">child-component</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- XLink --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">svg</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">:xlink:special</span>=<span class="string">"foo"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br></pre>
+            </span>
+          </figure>
+          <figure class="highlight html">
+            <span class="code">
+                <pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">v-bind:disabled</span>=<span class="string">"isButtonDisabled"</span>&gt;</span>Button<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre>
+            </span>
+          </figure>
+
+          <h3>JavaScript 표현식 사용</h3>
+          <figure class="highlight html">
+            <span class="code">
+                <pre><span class="line">{{ number + 1 }}</span><br><span class="line"></span><br><span class="line">{{ ok ? 'YES' : 'NO' }}</span><br><span class="line"></span><br><span class="line">{{ message.split('').reverse().join('') }}</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-bind:id</span>=<span class="string">"'list-' + id"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre>
+            </span>
+          </figure>
+          <figure class="highlight html">
+            <span class="code">
+                <pre><span class="line"><span class="comment">&lt;!-- 아래는 구문입니다, 표현식이 아닙니다. --&gt;</span></span><br><span class="line">{{ var a = 1 }}</span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 조건문은 작동하지 않습니다. 삼항 연산자를 사용해야 합니다. --&gt;</span></span><br><span class="line">{{ if (ok) { return message } }}</span><br></pre>
+            </span>
+          </figure>
+
+          <h2>디렉티브</h2>
+          <p>디렉티브는 <code>v-</code> 접두사가 있는 특수 속성입니다. 디렉티브 속성 값은 <strong>단일 JavaScript 표현식</strong> 이 됩니다. (나중에 설명할 <code>v-for</code>는 예외입니다.) 디렉티브의 역할은 표현식의 값이 변경될 때 사이드이펙트를 반응적으로 DOM에 적용하는 것 입니다. 아래 예제에서 살펴보겠습니다.</p>
+          <figure class="highlight html">
+            <span class="code">
+                <pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">v-if</span>=<span class="string">"seen"</span>&gt;</span>이제 나를 볼 수 있어요<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre>
+            </span>
+          </figure>
+          <p>여기서, <code>v-if</code> 디렉티브는 <code>seen</code> 표현의 진실성에 기반하여 <code>&lt;p&gt;</code> 엘리먼트를 제거 또는 삽입합니다.</p>
+
+          <h3>전달인자</h3>
+          <figure class="highlight html">
+            <span class="code">
+              <pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">v-bind:href</span>=<span class="string">"url"</span>&gt;</span> ... <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre>
+            </span>
+          </figure>
+          <figure class="highlight html">
+            <span class="code">
+              <pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">v-on:click</span>=<span class="string">"doSomething"</span>&gt;</span> ... <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre>
+            </span>
+          </figure>
+
+          <h3>수식어</h3>
+          <figure class="highlight html">
+            <span class="code">
+                <pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">v-on:submit.prevent</span>=<span class="string">"onSubmit"</span>&gt;</span> ... <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre>
+            </span>
+          </figure>
+
+          <h2>약어</h2>
+          <h3>v-bind 약어</h3>
+          <figure class="highlight html">
+            <span class="code">
+                <pre><span class="line"><span class="comment">&lt;!-- 전체 문법 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">v-bind:href</span>=<span class="string">"url"</span>&gt;</span> ... <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 약어 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">:href</span>=<span class="string">"url"</span>&gt;</span> ... <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre>
+            </span>
+          </figure>
+          <h3>v-on 약어</h3>
+          <figure class="highlight html">
+            <span class="code">
+                <pre><span class="line"><span class="comment">&lt;!-- 전체 문법 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">v-on:click</span>=<span class="string">"doSomething"</span>&gt;</span> ... <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 약어 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> @<span class="attr">click</span>=<span class="string">"doSomething"</span>&gt;</span> ... <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre>
+            </span>
+          </figure>
+      </div>
+      <div class="guide-links">
+          <span>← <a href="index.html">홈으로</a></span>
+          <span style="float: right;"><a href="guide2.html">다음으로</a> →</span>
+      </div>
+  </div>
+  <footer id="footer">footer</footer>
+</body>
+</html>
